@@ -46,3 +46,12 @@ export type INewUser = {
   username: string
   password: string
 }
+
+export type IContextType = {
+  user: IUser | null
+  isLoading: boolean
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>
+  isAuthenticated: boolean
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
+  // checkIsAuthenticated: () => Promise<boolean>
+}

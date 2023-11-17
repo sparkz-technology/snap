@@ -16,12 +16,17 @@ import { Input } from '@/components/ui/input'
 import { SignupValidation } from '@/lib/validation'
 import Loader from '@/components/shared/Loader'
 import { Link } from 'react-router-dom'
-import { useCreateUserAccount } from '@/lib/react-query/queriesAndMutations'
+import {
+  useCreateUserAccount,
+  useSignInAccount,
+} from '@/lib/react-query/queriesAndMutations'
 
 const SignupForm: React.FC = () => {
   const { toast } = useToast()
   const { mutateAsync: createUserAccount, isLoading: isCreatingAccount } =
     useCreateUserAccount()
+  const { mutateAsync: signInAccount, isLoading: isSigningIn } =
+    useSignInAccount()
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -42,6 +47,13 @@ const SignupForm: React.FC = () => {
     if (!newUser) {
       return toast({
         title: 'Sign up failed. Please try again.',
+      })
+    }
+    const { email, password } = values
+    const session = await signInAccount({ email, password })
+    if (!session) {
+      return toast({
+        title: 'Sign in failed. Please try again.',
       })
     }
   }
