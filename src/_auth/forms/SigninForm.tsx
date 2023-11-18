@@ -65,8 +65,7 @@ const SigninForm: React.FC = () => {
           Log in to your account
         </h2>
         <p className="text-light-3 small-medium md:base-regular mt-2">
-          Welcome back! Log in to your existing account to access all the
-          features
+          Welcome back! Please login to your account.
         </p>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -99,7 +98,7 @@ const SigninForm: React.FC = () => {
             )}
           />
           <Button type="submit" className="shad-button_primary">
-            {isUserLoading ? (
+            {isUserLoading || isSigningIn ? (
               <div className="flex-center gap-2">
                 <Loader />
                 Loading...
