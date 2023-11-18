@@ -18,15 +18,15 @@ const INITIAL_STATE = {
   isAuthenticated: false,
   setUser: () => {},
   setIsAuthenticated: () => {},
-  checkIsAuthenticated: async () => false as boolean,
+  checkAuthUser: async () => false as boolean,
 }
 export const AuthContext = createContext<IContextType>(INITIAL_STATE)
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const navigate = useNavigate()
   const [user, setUser] = useState<IUser | null>(INITIAL_USER)
   const [isLoading, setIsLoading] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const navigate = useNavigate()
   const checkAuthUser = async () => {
     setIsLoading(true)
     try {
@@ -56,10 +56,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (
       localStorage.getItem('cookieFallback') === 'true' ||
       localStorage.getItem('cookieFallback') === null
-    )
+    ) {
       navigate('/sign-in')
+    }
     checkAuthUser()
-  }, [navigate])
+  }, [])
   const value = {
     user,
     isLoading,

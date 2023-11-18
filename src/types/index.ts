@@ -53,5 +53,5 @@ export type IContextType = {
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>
   isAuthenticated: boolean
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
-  // checkIsAuthenticated: () => Promise<boolean>
+  checkAuthUser: () => Promise<boolean>
 }
