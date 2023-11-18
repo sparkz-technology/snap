@@ -41,7 +41,17 @@ const routes = createBrowserRouter([
         <RootLayout />
       </Provider>
     ),
-    children: [{ index: true, element: <Home /> }],
+    children: [
+      { index: true, element: <Home /> },
+      { path: '/explore', element: <div>explore</div> },
+      { path: '/saved', element: <div>saved</div> },
+      { path: '/all-users', element: <div>all-users</div> },
+      { path: '/create-post/:id', element: <div>create post</div> },
+      { path: '/update-post/:id', element: <div>post</div> },
+      { path: '/posts/:id', element: <div>post</div> },
+      { path: '/profile/:id', element: <div>profile</div> },
+      { path: 'update-profile/:id', element: <div>update profile</div> },
+    ],
   },
 ])
 
