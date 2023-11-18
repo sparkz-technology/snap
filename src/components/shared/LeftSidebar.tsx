@@ -7,7 +7,7 @@ import { useUserContext, INITIAL_USER } from '@/context/AuthContext'
 import { useSignOutAccount } from '@/lib/react-query/queriesAndMutations'
 import Loader from './Loader'
 
-const LeftSidebar = () => {
+const LeftSidebar: React.FC = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const { user, setUser, setIsAuthenticated, isLoading } = useUserContext()

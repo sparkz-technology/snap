@@ -1,7 +1,17 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './globals.css'
 import SigninForm from './_auth/forms/SigninForm'
-import { Home } from './_root/pages'
+import {
+  AllUsers,
+  CreatePost,
+  EditPost,
+  Explore,
+  Home,
+  PostDetails,
+  Profile,
+  Saved,
+  UpdateProfile,
+} from './_root/pages'
 import SignupForm from './_auth/forms/SignupForm'
 import AuthLayout from './_auth/AuthLayout'
 import RootLayout from './_root/RootLayout'
@@ -43,14 +53,14 @@ const routes = createBrowserRouter([
     ),
     children: [
       { index: true, element: <Home /> },
-      { path: '/explore', element: <div>explore</div> },
-      { path: '/saved', element: <div>saved</div> },
-      { path: '/all-users', element: <div>all-users</div> },
-      { path: '/create-post/:id', element: <div>create post</div> },
-      { path: '/update-post/:id', element: <div>post</div> },
-      { path: '/posts/:id', element: <div>post</div> },
-      { path: '/profile/:id', element: <div>profile</div> },
-      { path: 'update-profile/:id', element: <div>update profile</div> },
+      { path: '/explore', element: <Explore /> },
+      { path: '/saved', element: <Saved /> },
+      { path: '/all-users', element: <AllUsers /> },
+      { path: '/create-post', element: <CreatePost /> },
+      { path: '/update-post/:id', element: <EditPost /> },
+      { path: '/posts/:id', element: <PostDetails /> },
+      { path: '/profile/:id', element: <Profile /> },
+      { path: 'update-profile/:id', element: <UpdateProfile /> },
     ],
   },
 ])
