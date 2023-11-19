@@ -1,11 +1,4 @@
-import {
-  Route,
-  Routes,
-  Link,
-  Outlet,
-  useParams,
-  useLocation,
-} from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { LikedPosts } from '@/_root/pages'
 import { useUserContext } from '@/context/AuthContext'
@@ -13,6 +6,7 @@ import { useGetUserById } from '@/lib/react-query/queriesAndMutations'
 import Loader from '@/components/shared/Loader'
 import { Button } from '@/components/ui/button'
 import GridPostList from '@/components/shared/GridPostList'
+import { useState } from 'react'
 
 interface StabBlockProps {
   value: string | number
@@ -29,8 +23,9 @@ const StatBlock: React.FC<StabBlockProps> = ({ value, label }) => (
 const Profile: React.FC = () => {
   const { id } = useParams()
   const { user } = useUserContext()
-  const { pathname } = useLocation()
+  // const { pathname } = useLocation()
 
+  const [activeTab, setActiveTab] = useState<'POSTS' | 'LIKED_POSTS'>('POSTS')
   const { data: currentUser } = useGetUserById(id || '')
 
   if (!currentUser)
@@ -100,7 +95,7 @@ const Profile: React.FC = () => {
         </div>
       </div>
 
-      {currentUser.$id === user?.id && (
+      {/* {currentUser.$id === user?.id && (
         <div className="flex max-w-5xl w-full">
           <Link
             to={`/profile/${id}`}
@@ -131,9 +126,8 @@ const Profile: React.FC = () => {
             Liked Posts
           </Link>
         </div>
-      )}
-
-      <Routes>
+      )} */}
+      {/* <Routes>
         <Route
           index
           element={<GridPostList posts={currentUser.posts} showUser={false} />}
@@ -142,7 +136,46 @@ const Profile: React.FC = () => {
           <Route path="/liked-posts" element={<LikedPosts />} />
         )}
       </Routes>
-      <Outlet />
+
+      <Outlet /> */}
+      {currentUser.$id === user?.id && (
+        <div className="flex max-w-5xl w-full gap-2">
+          <Button
+            type="button"
+            onClick={() => setActiveTab('POSTS')}
+            className={`profile-tab rounded-l-lg ${
+              activeTab === 'POSTS' && '!bg-dark-3'
+            }`}
+          >
+            <img
+              src={'/assets/icons/posts.svg'}
+              alt="posts"
+              width={20}
+              height={20}
+            />
+            Posts
+          </Button>
+          <Button
+            type="button"
+            onClick={() => setActiveTab('LIKED_POSTS')}
+            className={`profile-tab rounded-r-lg ${
+              activeTab === 'LIKED_POSTS' && '!bg-dark-3'
+            }`}
+          >
+            <img
+              src={'/assets/icons/like.svg'}
+              alt="like"
+              width={20}
+              height={20}
+            />
+            Liked Posts
+          </Button>
+        </div>
+      )}
+      {activeTab === 'POSTS' && (
+        <GridPostList posts={currentUser.posts} showUser={false} />
+      )}
+      {activeTab === 'LIKED_POSTS' && <LikedPosts />}
     </div>
   )
 }
