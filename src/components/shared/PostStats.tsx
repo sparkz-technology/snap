@@ -9,31 +9,33 @@ import {
   useLikePost,
   useSavePost,
 } from '@/lib/react-query/queriesAndMutations'
+import Loader from './Loader'
 
 type PostStatsProps = {
-  post: Models.Document
+  post: Models.Document | undefined
   userId: string | undefined
 }
 const PostStats: React.FC<PostStatsProps> = ({ post, userId }) => {
   const location = useLocation()
-  const likesList = post.likes.map((user: Models.Document) => user.$id)
+  const likesList = post?.likes.map((user: Models.Document) => user.$id)
 
   const [likes, setLikes] = useState<string[]>(likesList)
   const [isSaved, setIsSaved] = useState(false)
 
   const { mutate: likePost } = useLikePost()
-  const { mutate: savePost } = useSavePost()
-  const { mutate: deleteSavePost } = useDeleteSavedPost()
+  const { mutate: savePost, isPending: isSavingPost } = useSavePost()
+  const { mutate: deleteSavePost, isPending: isDeletingPost } =
+    useDeleteSavedPost()
 
   const { data: currentUser } = useGetCurrentUser()
 
   const savedPostRecord = currentUser?.save.find(
-    (record: Models.Document) => record.post.$id === post.$id,
+    (record: Models.Document) => record.post.$id === post?.$id,
   )
-
   useEffect(() => {
     setIsSaved(!!savedPostRecord)
-  }, [currentUser, savedPostRecord])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser])
 
   const handleLikePost = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
@@ -49,7 +51,7 @@ const PostStats: React.FC<PostStatsProps> = ({ post, userId }) => {
       }
 
     setLikes(likesArray)
-    likePost({ postId: post.$id, likesArray })
+    likePost({ postId: post?.$id || '', likesArray })
   }
 
   const handleSavePost = (
@@ -61,7 +63,7 @@ const PostStats: React.FC<PostStatsProps> = ({ post, userId }) => {
       setIsSaved(false)
       return deleteSavePost(savedPostRecord.$id)
     }
-    if (userId) savePost({ userId: userId, postId: post.$id })
+    if (userId) savePost({ userId: userId, postId: post?.$id || '' })
     setIsSaved(true)
   }
 
@@ -90,14 +92,18 @@ const PostStats: React.FC<PostStatsProps> = ({ post, userId }) => {
       </div>
 
       <div className="flex gap-2">
-        <img
-          src={isSaved ? '/assets/icons/saved.svg' : '/assets/icons/save.svg'}
-          alt="share"
-          width={20}
-          height={20}
-          className="cursor-pointer"
-          onClick={(e) => handleSavePost(e)}
-        />
+        {isSavingPost || isDeletingPost ? (
+          <Loader />
+        ) : (
+          <img
+            src={isSaved ? '/assets/icons/saved.svg' : '/assets/icons/save.svg'}
+            alt="share"
+            width={20}
+            height={20}
+            className="cursor-pointer"
+            onClick={(e) => handleSavePost(e)}
+          />
+        )}
       </div>
     </div>
   )
