@@ -25,4 +25,4 @@ This project is a social media application built with React and TypeScript. It a
 
 ## Questions
 
-If you have any questions about the project, please open an issue or contact me directly at your-email@example.com. You can find more of my work at [sparkz-technology](https://github.com/sparkz-technology/).
+If you have any questions about the project, please open an issue or contact me directly at sutharsansparkz@gmail.com. You can find more of my work at [sparkz-technology](https://github.com/sparkz-technology/).
