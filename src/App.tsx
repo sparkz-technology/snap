@@ -7,6 +7,7 @@ import {
   EditPost,
   Explore,
   Home,
+  LikedPosts,
   PostDetails,
   Profile,
   Saved,
@@ -60,7 +61,8 @@ const routes = createBrowserRouter([
       { path: '/update-post/:id', element: <EditPost /> },
       { path: '/posts/:id', element: <PostDetails /> },
       { path: '/profile/:id', element: <Profile /> },
-      { path: 'update-profile/:id', element: <UpdateProfile /> },
+      { path: '/profile/:id/liked-posts', element: <LikedPosts /> },
+      { path: '/update-profile/:id', element: <UpdateProfile /> },
     ],
   },
 ])

@@ -29,9 +29,7 @@ import {
 } from '@/lib/appwrite/api'
 import { INewPost, INewUser, IUpdatePost, IUpdateUser } from '@/types'
 
-// ============================================================
 // AUTH QUERIES
-// ============================================================
 
 export const useCreateUserAccount = () => {
   return useMutation({
@@ -52,15 +50,13 @@ export const useSignOutAccount = () => {
   })
 }
 
-// ============================================================
 // POST QUERIES
-// ============================================================
-
+//! NOTE: The useInfiniteQuery hook is used for pagination
 export const useGetPosts = () => {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
     queryFn: getInfinitePosts as any,
-    initialPageParam: undefined,
+    initialPageParam: 0,
     getNextPageParam: (lastPage: any) => {
       // If there's no data, there are no more pages.
       if (lastPage && lastPage.documents.length === 0) {
@@ -206,9 +202,7 @@ export const useDeleteSavedPost = () => {
   })
 }
 
-// ============================================================
 // USER QUERIES
-// ============================================================
 
 export const useGetCurrentUser = () => {
   return useQuery({
