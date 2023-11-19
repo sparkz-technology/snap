@@ -1,27 +1,28 @@
-# React + TypeScript + Vite
+# Social Media Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of Contents
 
-Currently, two official plugins are available:
+1. [Description](#description)
+2. [Features](#features)
+3. [Questions](#questions)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+This project is a social media application built with React and TypeScript. It allows users to create a profile, post updates, and follow other users. The application is designed with a modern and user-friendly interface, and it's optimized for performance and usability.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- User authentication: Users can sign up and log in to their accounts securely.
+- Profile creation: Users can create and customize their profiles with a profile picture, bio, and more.
+- Posting updates: Users can post updates and share them with other users.
+- Following other users: Users can follow other users.
+- Liking posts: Users can like posts from other users.
+- Saving posts: Users can save posts from other users.
+- Searching for Posts: Users can search for posts by keyword.
+- Responsive design: The application is designed to work on all screen sizes.
+- Optimized for performance: The application is optimized for performance and usability.
+- Modern interface: The application has a modern and user-friendly interface.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+## Questions
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+If you have any questions about the project, please open an issue or contact me directly at your-email@example.com. You can find more of my work at [sparkz-technology](https://github.com/sparkz-technology/).
